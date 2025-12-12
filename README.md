@@ -1,124 +1,141 @@
-## AIOZ dCDN CLI Node
+## AIOZ DePIN CLI
 
-Official dCDN CLI Node implementation of the AIOZ Network.
+Official DePIN CLI implementation of the AIOZ Network.
 
-## What is AIOZ dCDN CLI Node?
+## What is AIOZ DePIN CLI?
 
-AIOZ dCDN CLI Node is the software to become an AIOZ Node in AIOZ dCDN. AIOZ Node contributes storage capacity, network bandwidth and computing power to the AIOZ dCDN and gets rewards in AIOZ Tokens.
+AIOZ DePIN CLI is a command-line application that turns your machine into an AIOZ node. As a node, it contributes storage capacity, network bandwidth, and computing power to the AIOZ DePIN network and earns rewards in AIOZ tokens.
 
 ## Requirements
 
 * Windows 10 version 22H2 64-bit or above
-* Ubuntu 14.06 64-bit or above
+* Ubuntu 14.04 64-bit or above
 * macOS Catalina version 10.15 or above
 
 ## Getting started
 
 ### Windows
-Download and extract the latest AIOZ dCDN CLI Node. The scripts below are written for Windows PowerShell.
+Download and extract the latest AIOZ DePIN CLI. The scripts below are written for Windows PowerShell.
 ```shell
-curl.exe -LO https://github.com/AIOZNetwork/aioz-dcdn-cli-node/files/13561213/aioznode-windows-amd64-1.1.0.zip
-Expand-Archive -Path aioznode-windows-amd64-1.1.0.zip -DestinationPath .
-ren aioznode-windows-amd64-1.1.0.exe aioznode.exe
+curl.exe -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-windows-amd64-1.2.5.zip
+Expand-Archive -Path aioz-depin-windows-amd64-1.2.5.zip -DestinationPath .
+cd aioz-depin-windows-amd64-1.2.5
 ```
 
-Verify the node is runnable
+Verify the installation
 ```shell
-.\aioznode.exe version
+.\aioz-depin.exe version
 ```
-The output should be the version of AIOZ dCDN Node.
+The output should be the version of AIOZ DePIN CLI.
 
-Generate new mnemonic phrase and private key
+Generate a new mnemonic phrase and private key
 ```shell
-.\aioznode.exe keytool new --save-priv-key privkey.json
+.\aioz-depin.exe keytool new --save-priv-key privkey.json
 ```
-`--save-priv-key` write the private key to file
+`--save-priv-key` writes the private key to file
 
 Response
 ```json
 {
         "address": "aioz1k28nzwgrwgzrwfuwsfcqjyvd0r4lfprql2c4uf",
         "address_hex": "0xB28F313903720437278E827009118d78eBf48460",
-        "pub_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PubKey\",\"key\":\"AxSwg94OuvFInQXiZtHevsw7gFKvbZXCqFunK3pMjV0I\"}",
-        "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SDtubqMUGKn+7doBCCOfegAI9OGMIbE=\"}",
-        "mnemonic": "rain wing olive skate effort present long myself combine giant vote stay sweet bundle agree lock connect glide absent spider effort attitude enemy mouse"
+        "pub_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PubKey\",\"key\":\"AxSwg94OuvFIn...CqFunK3pMjV0I\"}",
+        "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SD...BCCOfegAI9OGMIbE=\"}",
+        "mnemonic": "rain wing olive skate effort present long myself combine ... glide absent spider effort attitude enemy mouse"
 }
 ```
-**IMPORTANT NOTE**: Make sure to backup and secure your mnemonic phrase as it will be used in case of migration or recovering your node.
 
 Run the node
 ```shell
-.\aioznode.exe start --home nodedata --priv-key-file privkey.json
+.\aioz-depin.exe start --home nodedata --priv-key-file privkey.json
 ```
 `--home` data folder of the node
 
 `--priv-key-file` the private key file which the node starts with. If you do not specify the private key file, the node will ask for it from the standard input stream.
 
 Note: 
-Because AIOZ dCDN CLI Node automatically updates itself by downloading and replacing the executable file, make sure to set file permission to writable.
-AIOZ dCDN CLI Node has to stop to perform auto update, it should be run as Windows Service to start again after update and at system boot.
+Because AIOZ DePIN CLI automatically updates itself by downloading and replacing the executable file, make sure to set file permission to writable.
+AIOZ DePIN CLI has to stop to perform auto update, it should be run as Windows Service to start again after update and at system boot.
+
+**IMPORTANT NOTE**
+- Treat your `priv_key` JSON and mnemonic phrase as **wallet secrets**. Anyone who has them can **control your node rewards**.
+- Use a **dedicated key for each node**; **do not reuse** the key from your main wallet, exchange account, or other nodes.
+- Store backups in an **offline, encrypted location** such as encrypted USB drives, air-gapped devices, or hardware security modules (HSM). 
+- **Never paste** your mnemonic or `priv_key` into websites, chats, or support tickets.
 
 ### macOS and Linux
 
-Download the latest AIOZ dCDN CLI Node
+Download the latest AIOZ DePIN CLI
 
 For macOS
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-dcdn-cli-node/files/13561206/aioznode-darwin-amd64-1.1.0.tar.gz
-tar xzf aioznode-darwin-amd64-1.1.0.tar.gz
-mv aioznode-darwin-amd64-1.1.0 aioznode
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-amd64-1.2.5.tar.xz
+tar xzf aioz-depin-darwin-amd64-1.2.5.tar.xz
+cd aioz-depin-darwin-amd64-1.2.5
 ```
 
 For Linux
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-dcdn-cli-node/files/13561211/aioznode-linux-amd64-1.1.0.tar.gz
-tar xzf aioznode-linux-amd64-1.1.0.tar.gz
-mv aioznode-linux-amd64-1.1.0 aioznode
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-linux-amd64-1.2.5.tar.xz
+tar xzf aioz-depin-linux-amd64-1.2.5.tar.xz
+cd aioz-depin-linux-amd64-1.2.5
 ```
 
-Verify the node is runnable
+Verify the installation
 ```shell
-./aioznode version
+./aioz-depin version
 ```
-The output should be the version of AIOZ dCDN Node.
+The output should be the version of AIOZ DePIN CLI.
 
-Generate new mnemonic phrase and private key
+Generate a new mnemonic phrase and private key
 ```shell
-./aioznode keytool new --save-priv-key privkey.json
+./aioz-depin keytool new --save-priv-key privkey.json
 ```
-`--save-priv-key` write the private key to file
+`--save-priv-key` writes the private key to file
 
 Response
 ```json
 {
         "address": "aioz1k28nzwgrwgzrwfuwsfcqjyvd0r4lfprql2c4uf",
         "address_hex": "0xB28F313903720437278E827009118d78eBf48460",
-        "pub_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PubKey\",\"key\":\"AxSwg94OuvFInQXiZtHevsw7gFKvbZXCqFunK3pMjV0I\"}",
-        "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SDtubqMUGKn+7doBCCOfegAI9OGMIbE=\"}",
-        "mnemonic": "rain wing olive skate effort present long myself combine giant vote stay sweet bundle agree lock connect glide absent spider effort attitude enemy mouse"
+        "pub_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PubKey\",\"key\":\"AxSwg94OuvFIn...CqFunK3pMjV0I\"}",
+        "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SD...BCCOfegAI9OGMIbE=\"}",
+        "mnemonic": "rain wing olive skate effort present long myself combine ... glide absent spider effort attitude enemy mouse"
 }
 ```
-**IMPORTANT NOTE**: Make sure to backup and secure your mnemonic phrase as it will be used in case of migration or recovering your node.
+**IMPORTANT NOTE**
+- Treat your `priv_key` JSON and mnemonic phrase as **wallet secrets**. Anyone who has them can **control your node rewards**.
+- Use a **dedicated key for each node**; **do not reuse** the key from your main wallet, exchange account, or other nodes.
+- Store backups in an **offline, encrypted location** such as encrypted USB drives, air-gapped devices, or hardware security modules (HSM). 
+- **Never paste** your mnemonic or `priv_key` into websites, chats, or support tickets.
+
 
 Run the node
 ```shell
-./aioznode start --home nodedata --priv-key-file privkey.json
+./aioz-depin start --home nodedata --priv-key-file privkey.json
 ```
 `--home` data folder of the node
 
 `--priv-key-file` the private key file which the node starts with. If you do not specify the private key file, the node will ask for it from the standard input stream.
 
 **Note**: 
-Because AIOZ dCDN CLI Node automatically updates itself by downloading and replacing the executable file, make sure to set file permission to writable.
-AIOZ dCDN CLI Node has to stop to perform auto update, it should be run with `launchctl`(macOS) or `systemctl`(Linux) to start it again after update and at system boot.
+Because AIOZ DePIN CLI automatically updates itself by downloading and replacing the executable file, make sure to set file permission to writable.
+AIOZ DePIN CLI has to stop to perform auto update, it should be run with `launchctl`(macOS) or `systemctl`(Linux) to start it again after update and at system boot.
 
 ## Usage
 
 ### View node status
+For Windows
 ```shell
-./aioznode.exe stats
+.\aioz-depin.exe stats
 ```
-Note: This command requires a running node, if your node is not on default port `1317`, you need to specify it with the flag `--endpoint`
+For macOS and Linux
+
+```shell
+./aioz-depin stats
+```
+
+Note: This command requires a running node. If your node is not on default port `1317`, you need to specify it with the flag `--endpoint`
 
 Response
 ```json
@@ -129,58 +146,89 @@ Response
         },
         "delivery": {
                 "upstream_speed": 0
+        },
+        "transcoding": {
+                "status": "Standby"
         }
 }
 ```
 
 ### View reward
+
+For Windows
 ```shell
-./aioznode.exe reward balance
+.\aioz-depin.exe reward balance
 ```
-Note: This command requires a running node, if your node is not on default port `1317`, you need to specify it with the flag `--endpoint`
+For macOS and Linux
+
+```shell
+./aioz-depin reward balance
+```
+
+Note: This command requires a running node. If your node is not on default port `1317`, you need to specify it with the flag `--endpoint`
 
 Response
 ```json
 {
-        "balance": [
-                {
-                        "denom": "attoaioz",
-                        "amount": "7218886258271998637"
-                }
-        ],
-        "storage_earned": [
-                {
-                        "denom": "attoaioz",
-                        "amount": "810423534750216148"
-                }
-        ],
-        "delivery_earned": [
-                {
-                        "denom": "attoaioz",
-                        "amount": "7525653191257749557"
-                }
-        ],
-        "withdraw": [
-                {
-                        "denom": "attoaioz",
-                        "amount": "1100000000000000000"
-                }
-        ],
-        "delivery_counter": 16521
+    "balance": [
+        {
+            "denom": "attoaioz",
+            "amount": "7761729917265715262" 
+        }
+    ],
+    "storage_earned": [
+        {
+            "denom": "attoaioz",
+            "amount": "810423534750216148"
+        }
+    ],
+    "delivery_earned": [
+        {
+            "denom": "attoaioz",
+            "amount": "7525653191257749557"
+        }
+    ],
+    "transcoding_earned": [
+        {
+            "denom": "attoaioz",
+            "amount": "525653191257749557"
+        }
+    ],
+    "withdraw": [
+        {
+            "denom": "attoaioz",
+            "amount": "1100000000000000000"
+        }
+    ],
+    "delivery_counter": 16521
 }
 ```
 
+`balance` is the amount of reward that is available for withdrawal.
+
+`storage_earned`, `delivery_earned`, `transcoding_earned` are the total amount of reward for storage, delivery and transcode since the beginning.
+
+`withdraw` is the total amount of reward that has been withdrawn since the beginning.
+
+`delivery_counter` is the counter that counts the number of delivery since the beginning.
+
 ### Withdraw reward
+For Windows
 ```shell
-./aioznode.exe reward withdraw --address 0x9A20600a143745404f1AA1C69Bd280f4bD5B4408 --amount 1aioz --priv-key-file privkey.json
+.\aioz-depin.exe reward withdraw --address 0x9A20600a143745404f1AA1C69Bd280f4bD5B4408 --amount 1aioz --priv-key-file privkey.json
+```
+
+For macOS and Linux
+```shell
+./aioz-depin reward withdraw --address 0x9A20600a143745404f1AA1C69Bd280f4bD5B4408 --amount 1aioz --priv-key-file privkey.json
 ```
 This command requires a running node. If your node is not on default port `1317`, you need to specify it with the flag `--endpoint`. 
 
-`--address` the address to withdraw the reward to. The rewards is transferred in **AIOZ Chain**.
+`--address` the address to withdraw the reward to. The reward is transferred on the **AIOZ Chain**.
 
-`--amount` the amount of reward to withdraw. The unit can be `aioz` or `attoaioz`. 1 aioz equal 10^18 attoaioz. Minimum withdraw is 1 aioz. Example values: `1aioz`, `1.1aioz`, `1100000000000000000attoaioz`.
+`--amount` the amount of reward to withdraw. The unit can be `aioz` or `attoaioz`. 1 AIOZ equals 10¹⁸ attoaioz. Minimum withdrawal is 1 AIOZ. Example values: `1aioz`, `1.1aioz`, `1100000000000000000attoaioz`.
 
-`--priv-key-file` the private key file which the node started with. If you do not specify the private key file, the node will ask for it from the standard input stream.
+`--priv-key-file` the private key file that the node started with. If you do not specify the private key file, the node will ask for it from the standard input stream.
 
 Response
 ```json
@@ -189,18 +237,26 @@ Response
 }
 ```
 
+**Note**: Withdrawal requests are rate-limited to **one request per hour**. Please plan your withdrawals accordingly.
+
 ### Recover private key from mnemonic phrase
+For Windows
 ```shell
-.\aioznode.exe keytool recover "rain wing olive skate effort present long myself combine giant vote stay sweet bundle agree lock connect glide absent spider effort attitude enemy mouse" --save-pri-key privkey.json
+.\aioz-depin.exe keytool recover "rain wing olive skate effort present long myself combine ... glide absent spider effort attitude enemy mouse" --save-priv-key privkey.json
 ```
-`--save-pri-key` write the private key to file.
+
+For macOS and Linux
+```shell
+./aioz-depin keytool recover "rain wing olive skate effort present long myself combine ... glide absent spider effort attitude enemy mouse" --save-priv-key privkey.json
+```
+`--save-priv-key` writes the private key to file.
 
 Response
 ```json
 {
         "address": "aioz1k28nzwgrwgzrwfuwsfcqjyvd0r4lfprql2c4uf",
         "address_hex": "0xB28F313903720437278E827009118d78eBf48460",
-        "pub_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PubKey\",\"key\":\"AxSwg94OuvFInQXiZtHevsw7gFKvbZXCqFunK3pMjV0I\"}",
-        "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SDtubqMUGKn+7doBCCOfegAI9OGMIbE=\"}"
+        "pub_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PubKey\",\"key\":\"AxSwg94OuvFIn...CqFunK3pMjV0I\"}",
+        "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SD...BCCOfegAI9OGMIbE=\"}"
 }
 ```
