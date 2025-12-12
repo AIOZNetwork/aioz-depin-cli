@@ -69,15 +69,17 @@ Download the latest AIOZ DePIN CLI
 
 For macOS
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-amd64-1.2.5.tar.xz
-tar xzf aioz-depin-darwin-amd64-1.2.5.tar.xz
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-amd64-1.2.5.tar.gz
+mkdir aioz-depin-darwin-amd64-1.2.5
+tar -C aioz-depin-darwin-amd64-1.2.5 -xzf aioz-depin-darwin-amd64-1.2.5.tar.gz
 cd aioz-depin-darwin-amd64-1.2.5
 ```
 
 For Linux
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-linux-amd64-1.2.5.tar.xz
-tar xzf aioz-depin-linux-amd64-1.2.5.tar.xz
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-linux-amd64-1.2.5.tar.gz
+mkdir aioz-depin-linux-amd64-1.2.5
+tar -C aioz-depin-linux-amd64-1.2.5 -xzf aioz-depin-linux-amd64-1.2.5.tar.gz
 cd aioz-depin-linux-amd64-1.2.5
 ```
 
