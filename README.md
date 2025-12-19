@@ -77,7 +77,7 @@ AIOZ DePIN CLI has to stop to perform auto update, it should be run as Windows S
 
 Download the latest AIOZ DePIN CLI
 
-For macOS - x86_64
+For macOS - ARM64
 
 ```shell
 curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-amd64-1.2.5.tar.gz
@@ -85,12 +85,12 @@ tar -xzf aioz-depin-darwin-amd64-1.2.5.tar.gz
 mv aioz-depin-cli-darwin-amd64 aioz-depin-cli
 ```
 
-For macOS - ARM64
+For macOS - x86_64
 
 ```shell
 curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-x86_64-1.2.5.tar.gz
 tar -xzf aioz-depin-darwin-x86_64-1.2.5.tar.gz
-mv aioz-depin-cli-darwin-x86_64 aioz-depin-cli
+mv aioz-depin-cli-darwin-arm64 aioz-depin-cli
 ```
 
 For Linux
