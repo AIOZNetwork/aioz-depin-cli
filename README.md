@@ -55,7 +55,7 @@ Response
 Run the node
 
 ```shell
-.\aioz-depin-cli.exe start --home nodedata --priv-key-file privkey.json
+.\aioz-depin-cli.exe start --home depin-data --priv-key-file privkey.json
 ```
 
 `--home` data folder of the node
@@ -90,7 +90,7 @@ For macOS - x86_64
 ```shell
 curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-x86_64-1.2.5.tar.gz
 tar -xzf aioz-depin-darwin-x86_64-1.2.5.tar.gz
-mv aioz-depin-cli-darwin-arm64 aioz-depin-cli
+mv aioz-depin-cli-darwin-amd64 aioz-depin-cli
 ```
 
 For Linux
@@ -139,7 +139,7 @@ Response
 Run the node
 
 ```shell
-./aioz-depin-cli start --home nodedata --priv-key-file privkey.json
+./aioz-depin-cli start --home depin-data --priv-key-file privkey.json
 ```
 
 `--home` data folder of the node
@@ -305,4 +305,3 @@ Response
   "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SD...BCCOfegAI9OGMIbE=\"}"
 }
 ```
-
