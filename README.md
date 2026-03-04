@@ -19,8 +19,8 @@ AIOZ DePIN CLI is a command-line appilcation that connects your machine to the A
 Download and extract the latest AIOZ DePIN CLI. The scripts below are written for Windows PowerShell.
 
 ```shell
-curl.exe -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-windows-amd64-1.2.5.zip
-Expand-Archive -Path aioz-depin-windows-amd64-1.2.5.zip -DestinationPath .
+curl.exe -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.6/aioz-depin-windows-amd64-1.2.6.zip
+Expand-Archive -Path aioz-depin-windows-amd64-1.2.6.zip -DestinationPath .
 ren aioz-depin-cli-windows-amd64.exe aioz-depin-cli.exe
 ```
 
@@ -62,6 +62,9 @@ Run the node
 
 `--priv-key-file` the private key file which the node starts with. If you do not specify the private key file, the node will ask for it from the standard input stream.
 
+`--auto-update` enables automatic self-updating while the DePIN is running.  
+When enabled, the application periodically checks for new releases and applies updates without requiring a restart. (This feature is **experimental** and may not be fully stable. It is recommended for testing environments only)
+
 Note:
 Because AIOZ DePIN CLI automatically updates itself by downloading and replacing the executable file, make sure to set file permission to writable.
 AIOZ DePIN CLI has to stop to perform auto update, it should be run as Windows Service to start again after update and at system boot.
@@ -80,24 +83,24 @@ Download the latest AIOZ DePIN CLI
 For macOS - ARM64
 
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-amd64-1.2.5.tar.gz
-tar -xzf aioz-depin-darwin-amd64-1.2.5.tar.gz
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.6/aioz-depin-darwin-amd64-1.2.6.tar.gz
+tar -xzf aioz-depin-darwin-amd64-1.2.6.tar.gz
 mv aioz-depin-cli-darwin-amd64 aioz-depin-cli
 ```
 
 For macOS - x86_64
 
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-darwin-x86_64-1.2.5.tar.gz
-tar -xzf aioz-depin-darwin-x86_64-1.2.5.tar.gz
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.6/aioz-depin-darwin-x86_64-1.2.6.tar.gz
+tar -xzf aioz-depin-darwin-x86_64-1.2.6.tar.gz
 mv aioz-depin-cli-darwin-amd64 aioz-depin-cli
 ```
 
 For Linux
 
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.5/aioz-depin-linux-amd64-1.2.5.tar.gz
-tar -xzf aioz-depin-linux-amd64-1.2.5.tar.gz
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.6/aioz-depin-linux-amd64-1.2.6.tar.gz
+tar -xzf aioz-depin-linux-amd64-1.2.6.tar.gz
 mv aioz-depin-cli-linux-amd64 aioz-depin-cli
 ```
 
@@ -146,9 +149,8 @@ Run the node
 
 `--priv-key-file` the private key file which the node starts with. If you do not specify the private key file, the node will ask for it from the standard input stream.
 
-**Note**:
-Because AIOZ DePIN CLI automatically updates itself by downloading and replacing the executable file, make sure to set file permission to writable.
-AIOZ DePIN CLI has to stop to perform auto update, it should be run with `launchctl`(macOS) or `systemctl`(Linux) to start it again after update and at system boot.
+`--auto-update` enables automatic self-updating while the DePIN is running.  
+When enabled, the application periodically checks for new releases and applies updates without requiring a restart. (This feature is **experimental** and may not be fully stable. It is recommended for testing environments only)
 
 ## Usage
 
@@ -166,8 +168,6 @@ For macOS and Linux
 ./aioz-depin-cli stats
 ```
 
-Note: This command requires a running node. If your node is not on default port `1317`, you need to specify it with the flag `--endpoint`
-
 Response
 
 ```json
@@ -181,25 +181,41 @@ Response
   },
   "transcoding": {
     "status": "Standby"
-  }
+  },
+  "ai_task": ["task_id","task_id"],
+  "ai_status": "online"
 }
 ```
+
+### Set storage limit
+
+For Windows
+
+```shell
+.\aioz-depin-cli.exe limit 1000 --priv-key-file privkey.json
+```
+
+For macOS and Linux
+
+```shell
+./aioz-depin-cli limit 1000 --priv-key-file privkey.json
+```
+
+Note: This command allow you to adjust the total storage limit in GB. (You can not set storage limit lower the storage size that has already been used)
 
 ### View reward
 
 For Windows
 
 ```shell
-.\aioz-depin-cli.exe reward balance
+.\aioz-depin-cli.exe reward balance --priv-key-file privkey.json
 ```
 
 For macOS and Linux
 
 ```shell
-./aioz-depin-cli reward balance
+./aioz-depin-cli reward balance --priv-key-file privkey.json
 ```
-
-Note: This command requires a running node. If your node is not on default port `1317`, you need to specify it with the flag `--endpoint`
 
 Response
 
@@ -235,17 +251,23 @@ Response
       "amount": "1100000000000000000"
     }
   ],
-  "delivery_counter": 16521
+  "delivery_counter": 16521,
+  "ai_earned": {
+    "denom": "attoaioz",
+    "amount": "800000000000000000"
+  },
+  "ai_earned_counter": 42
 }
 ```
 
 `balance` is the amount of reward that is available for withdrawal.
 
-`storage_earned`, `delivery_earned`, `transcoding_earned` are the total amount of reward for storage, delivery and transcode since the beginning.
+`storage_earned`, `delivery_earned`, `transcoding_earned`, `ai_earned` are the total amount of reward for storage, delivery, transcode and AI tasks since the beginning.
 
 `withdraw` is the total amount of reward that has been withdrawn since the beginning.
 
 `delivery_counter` is the counter that counts the number of delivery since the beginning.
+`ai_earned_counter` is the counter that counts the number of AI tasks since the beginning.
 
 ### Withdraw reward
 
@@ -305,3 +327,4 @@ Response
   "priv_key": "{\"@type\":\"/ethermint.crypto.v1.ethsecp256k1.PrivKey\",\"key\":\"rdWGOtJ/Uio4SD...BCCOfegAI9OGMIbE=\"}"
 }
 ```
+
