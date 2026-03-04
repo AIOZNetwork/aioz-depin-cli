@@ -83,9 +83,9 @@ Download the latest AIOZ DePIN CLI
 For macOS - ARM64
 
 ```shell
-curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.6/aioz-depin-darwin-amd64-1.2.6.tar.gz
-tar -xzf aioz-depin-darwin-amd64-1.2.6.tar.gz
-mv aioz-depin-cli-darwin-amd64 aioz-depin-cli
+curl -LO https://github.com/AIOZNetwork/aioz-depin-cli/releases/download/v1.2.6/aioz-depin-darwin-arm64-1.2.6.tar.gz
+tar -xzf aioz-depin-darwin-arm64-1.2.6.tar.gz
+mv aioz-depin-cli-darwin-arm64 aioz-depin-cli
 ```
 
 For macOS - x86_64
