@@ -192,13 +192,13 @@ Response
 For Windows
 
 ```shell
-.\aioz-depin-cli.exe limit 1000 --priv-key-file privkey.json
+.\aioz-depin-cli.exe storage limit 1000 --priv-key-file privkey.json
 ```
 
 For macOS and Linux
 
 ```shell
-./aioz-depin-cli limit 1000 --priv-key-file privkey.json
+./aioz-depin-cli storage limit 1000 --priv-key-file privkey.json
 ```
 
 Note: This command allow you to adjust the total storage limit in GB. (You can not set storage limit lower the storage size that has already been used)
